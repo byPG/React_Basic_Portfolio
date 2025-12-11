@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-DarkViolet: #5e4c5a;
+  --color-LighterViolet: #886d82;
+}
+
+/* Globalne style */
+body {
+  @apply flex justify-center items-center bg-DarkViolet text-gray-900 min-h-screen;
+}
+
+main {
+  @apply w-100 h-120 p-4 rounded-2xl bg-LighterViolet shadow-[0px_8px_14px_0px_rgba(0,_0,_0,_0.1)];
+}

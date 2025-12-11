@@ -15,10 +15,14 @@ function App() {
   }
 
   return (
-    <>
+    <main>
       <label>Task: </label>
       <input type="text" value={textTask} onChange={handleChange} />
-      <button onClick={addTask}>Dodaj</button>
+      <button
+        onClick={addTask}
+        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Dodaj
+      </button>
 
       <ol>
         {tasks.map(
@@ -30,7 +34,7 @@ function App() {
           )
         )}
       </ol>
-    </>
+    </main>
   );
 }
 
