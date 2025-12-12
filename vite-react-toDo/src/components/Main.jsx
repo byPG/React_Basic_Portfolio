@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function Main() {
   const [textTask, setTextTask] = useState(""); // tekst który wpisujesz do inputa - zadanie
-  const [tasks, setTasks] = useState([]); // dodawanie nowych tasków do listy
+  const [tasks, setTasks] = useState([]); // tablica z taskami; odawanie nowych tasków do listy
 
   function handleChange(event) {
     setTextTask(event.target.value);
@@ -10,12 +10,33 @@ export default function Main() {
 
   function addTask() {
     if (textTask.trim() === "") return; // walidcja, trim ucina biale znaki z przodu i z tylu, potem sprawdzamy czy pole jest puste
-    setTasks([...tasks, textTask]);
+    setTasks([
+      ...tasks,
+      {
+        text: textTask,
+        completed: false,
+      },
+    ]);
     setTextTask(""); // wyczyszczenie inputa
   }
 
   function handleDelete(index) {
     setTasks(tasks.filter((_, i) => i !== index)); // odfiltruj z tablicy element prawdziwy dla warunku !==index -> przechodzi po tablicy tasks i porównuje z index, ktory aktualnie jest w li
+  }
+
+  function toggleTask(index) {
+    //musi przejsc po wszystkich taskach
+    const updatedTasks = tasks.map((task, i) => {
+      if (i === index) {
+        return {
+          text: task.text,
+          completed: !task.completed,
+        };
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
   }
 
   return (
@@ -35,21 +56,22 @@ export default function Main() {
       </div>
 
       <ol>
-        {tasks.map(
-          (
-            task,
-            index // modyfikacja elementow tablicy do li
-          ) => (
-            <li key={index}>
-              {task}
-              <button
-                onClick={() => handleDelete(index)}
-                className="bg-red-500 text-white p-2 rounded">
-                Usuń
-              </button>
-            </li>
-          )
-        )}
+        {tasks.map((task, index) => (
+          <li key={index}>
+            <input
+              type="checkbox"
+              checked={task.completed}
+              onChange={() => toggleTask(index)}
+            />
+
+            {task.text}
+            <button
+              onClick={() => handleDelete(index)}
+              className="bg-red-500 text-white p-2 rounded">
+              Usuń
+            </button>
+          </li>
+        ))}
       </ol>
     </main>
   );
