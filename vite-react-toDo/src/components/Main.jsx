@@ -14,6 +14,10 @@ export default function Main() {
     setTextTask(""); // wyczyszczenie inputa
   }
 
+  function handleDelete(index) {
+    setTasks(tasks.filter((_, i) => i !== index)); // odfiltruj z tablicy element prawdziwy dla warunku !==index -> przechodzi po tablicy tasks i porównuje z index, ktory aktualnie jest w li
+  }
+
   return (
     <main>
       <div className="flex justify-between ">
@@ -36,7 +40,14 @@ export default function Main() {
             task,
             index // modyfikacja elementow tablicy do li
           ) => (
-            <li key={index}>{task}</li>
+            <li key={index}>
+              {task}
+              <button
+                onClick={() => handleDelete(index)}
+                className="bg-red-500 text-white p-2 rounded">
+                Usuń
+              </button>
+            </li>
           )
         )}
       </ol>
