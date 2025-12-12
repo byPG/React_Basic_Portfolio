@@ -17,7 +17,12 @@ function App() {
   return (
     <main>
       <label>Task: </label>
-      <input type="text" value={textTask} onChange={handleChange} />
+      <input
+        type="text"
+        value={textTask}
+        onChange={handleChange}
+        placeholder="Write your task here..."
+      />
       <button
         onClick={addTask}
         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
