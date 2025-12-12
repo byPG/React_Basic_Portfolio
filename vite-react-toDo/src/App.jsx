@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from "./components/Header.jsx";
 
 function App() {
   const [textTask, setTextTask] = useState(""); // tekst który wpisujesz do inputa - zadanie
@@ -15,31 +16,35 @@ function App() {
   }
 
   return (
-    <main>
-      <label>Task: </label>
-      <input
-        type="text"
-        value={textTask}
-        onChange={handleChange}
-        placeholder="Write your task here..."
-      />
-      <button
-        onClick={addTask}
-        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-        Dodaj
-      </button>
+    <>
+      <Header></Header>
+      <main>
+        <div className="flex justify-between ">
+          <input
+            type="text"
+            value={textTask}
+            onChange={handleChange}
+            placeholder="Write your task here..."
+          />
+          <button
+            onClick={addTask}
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            Dodaj
+          </button>
+        </div>
 
-      <ol>
-        {tasks.map(
-          (
-            task,
-            index // modyfikacja elementow tablicy do li
-          ) => (
-            <li key={index}>{task}</li>
-          )
-        )}
-      </ol>
-    </main>
+        <ol>
+          {tasks.map(
+            (
+              task,
+              index // modyfikacja elementow tablicy do li
+            ) => (
+              <li key={index}>{task}</li>
+            )
+          )}
+        </ol>
+      </main>
+    </>
   );
 }
 

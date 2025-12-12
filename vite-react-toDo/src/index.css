@@ -11,5 +11,5 @@ body {
 }
 
 main {
-  @apply w-100 h-120 p-4 rounded-2xl bg-LighterViolet shadow-[0px_8px_14px_0px_rgba(0,_0,_0,_0.1)];
+  @apply w-100 h-120 p-12 rounded-2xl bg-LighterViolet shadow-[0px_8px_14px_0px_rgba(0,0,0,0.1)];
 }
