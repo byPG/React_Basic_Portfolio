@@ -20,10 +20,6 @@ export default function Main() {
     setTextTask(""); // wyczyszczenie inputa
   }
 
-  function handleDelete(index) {
-    setTasks(tasks.filter((_, i) => i !== index)); // odfiltruj z tablicy element prawdziwy dla warunku !==index -> przechodzi po tablicy tasks i porównuje z index, ktory aktualnie jest w li
-  }
-
   function toggleTask(index) {
     //musi przejsc po wszystkich taskach
     const updatedTasks = tasks.map((task, i) => {
@@ -38,6 +34,21 @@ export default function Main() {
 
     setTasks(updatedTasks);
   }
+
+  function handleDelete(index) {
+    setTasks(tasks.filter((_, i) => i !== index)); // odfiltruj z tablicy element prawdziwy dla warunku !==index -> przechodzi po tablicy tasks i porównuje z index, ktory aktualnie jest w li
+  }
+
+  // licznik pozostalych tasków
+  const remainingTasks = tasks.filter(
+    (task) => task.completed === false
+  ).length;
+
+  //pozostałe taski do zrobienia (osobny widok)
+  const todoTasks = tasks.filter((task) => task.completed === false);
+
+  //taski, które zostały zrobione (osobny widok)
+  const doneTasks = tasks.filter((task) => task.completed === true);
 
   return (
     <main>
@@ -54,25 +65,52 @@ export default function Main() {
           Dodaj
         </button>
       </div>
+      <div className="flex justify-between">
+        <div>
+          <h3>Do zrobienia</h3>
+          <ol>
+            {todoTasks.map((task, index) => (
+              <li key={index}>
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => toggleTask(index)}
+                />
 
-      <ol>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <input
-              type="checkbox"
-              checked={task.completed}
-              onChange={() => toggleTask(index)}
-            />
+                {task.text}
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="bg-red-500 text-white p-2 rounded">
+                  Usuń
+                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
 
-            {task.text}
-            <button
-              onClick={() => handleDelete(index)}
-              className="bg-red-500 text-white p-2 rounded">
-              Usuń
-            </button>
-          </li>
-        ))}
-      </ol>
+        <div>
+          <h3>Zrobione</h3>
+          <ol>
+            {doneTasks.map((task, index) => (
+              <li key={index}>
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => toggleTask(index)}
+                />
+
+                {task.text}
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="bg-red-500 text-white p-2 rounded">
+                  Usuń
+                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+      <p>Pozostało zadań: {remainingTasks}</p>
     </main>
   );
 }
