@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function Main() {
   const [textTask, setTextTask] = useState(""); // tekst który wpisujesz do inputa - zadanie
-  const [tasks, setTasks] = useState([]); // tablica z taskami; odawanie nowych tasków do listy
+  const [tasks, setTasks] = useState([]); // tablica z taskami; dodawanie nowych tasków do listy
 
   function handleChange(event) {
     setTextTask(event.target.value);
@@ -52,7 +52,7 @@ export default function Main() {
 
   return (
     <main>
-      <div className="flex justify-between ">
+      <div className="flex justify-between">
         <input
           type="text"
           value={textTask}
